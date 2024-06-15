@@ -2,6 +2,12 @@
 title: "About me"
 ---
 
-Add some text and a figure describing myself.
+My name is **Cameron Playle** hailing from the ***true*** South Texas (AKA the Rio Grande Valley) and I work in Specialty Pharmacy as a Prior Authorization Representative. I got my bachelors degree in Health Science from Texas A&M University (WHOOP!) and am looking to pivot into a Data Analytics role.
 
-For details, see the exercise instructions. 
+I'm interested in healthcare research and want to learn more about military medicine as well as injury prevention in sports. I'm currently collaborating with a friend in Commercial Real Estate and helping create projection models, so my goal this semester is to gain better knowledge in statistical methods and how to conceptualize this data and tell a meaningful story.
+
+![](images/Cam&Truck-01.jpg)
+
+Bellow I have attached a graph showing the number of MLB pitching injuries since the adaptation of the pitch clock from this [article](https://www.nytimes.com/athletic/4465791/2023/05/02/mlb-pitch-clock-velocity-injury/) I found on "The Athletic."
+
+![](images/MLBInjuries-01.jpg)
