@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>YOURNAME Data Analysis Portfolio – readme</title>
+<title>YOURNAME Data Analysis Portfolio – Tidy Tuesday Exercise #4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +23,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,8 +67,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -78,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">YOURNAME Data Analysis Portfolio</span>
     </a>
   </div>
@@ -89,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../aboutme.html"> 
+    <a class="nav-link" href="../aboutme.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -98,23 +127,23 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="../../../starter-analysis-exercise/products/report/starter-analysis-report.html">
+    <a class="dropdown-item" href="../starter-analysis-exercise/products/report/starter-analysis-report.html">
  <span class="dropdown-text">Starter Analysis Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../coding-exercise/coding-exercise.html">
+    <a class="dropdown-item" href="../coding-exercise/coding-exercise.html">
  <span class="dropdown-text">R Coding Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../presentation-exercise/presentation-exercise.html">
+    <a class="dropdown-item" href="../presentation-exercise/presentation-exercise.html">
  <span class="dropdown-text">Presentation Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../tidytuesday-exercise/tidytuesday-exercise.html">
+    <a class="dropdown-item" href="../tidytuesday-exercise/tidytuesday-exercise.html">
  <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../../data-exercise/data-exercise.html">
+    <a class="dropdown-item" href="../data-exercise/data-exercise.html">
  <span class="dropdown-text">Tidy Tuesday Exercise #4</span></a>
   </li>  
     </ul>
@@ -141,12 +170,37 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tidy Tuesday Exercise #4</h1>
+</div>
 
 
 
-<p>This folder contains code for processing data.</p>
-<p>Currently, there is just a single Quarto file to illustrate how the processing can look like.</p>
-<p>Instead of a Quarto file that contains code, it is also possible to use R scripts or a combination of R scripts and Quarto code. Those approaches are illustrated in the full dataanalysis-template repository.</p>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Placeholder file for the future Tidy Tuesday exercise.</p>
+<p>install.packages(“tm”) install.packages(“wordcloud”) install.packages(“ggplot2”)</p>
+<p>library(tm) library(wordcloud) library(ggplot2)</p>
+<p>data(“crude”) docs &lt;- Corpus(VectorSource(crude))</p>
+<p>docs &lt;- docs %&gt;% tm_map(content_transformer(tolower)) %&gt;% tm_map(removePunctuation) %&gt;% tm_map(removeNumbers) %&gt;% tm_map(removeWords, stopwords(“english”)) %&gt;% tm_map(stripWhitespace)</p>
+<p>inspect(docs[1:2])</p>
+<p>dtm &lt;- DocumentTermMatrix(docs)</p>
+<p>m &lt;- as.matrix(dtm)</p>
+<p>word_freq &lt;- sort(colSums(m), decreasing = TRUE)</p>
+<p>word_freq_df &lt;- data.frame(word = names(word_freq), freq = word_freq) head(word_freq_df)</p>
+<p>set.seed(1234) # For reproducibility wordcloud(words = word_freq_df<span class="math inline">\(word, freq = word_freq_df\)</span>freq, min.freq = 2, max.words = 100, random.order = FALSE, colors = brewer.pal(8, “Dark2”))</p>
+<p>top_words &lt;- head(word_freq_df, 20) ggplot(top_words, aes(x = reorder(word, -freq), y = freq)) + geom_bar(stat = “identity”) + coord_flip() + labs(title = “Top 20 Words in Crude Oil Documents”, x = “Words”, y = “Frequency”) + theme_minimal()</p>
 
 
 
