@@ -3,3 +3,151 @@ title: "R Coding Exercise"
 ---
 
 Placeholder file for the future R coding exercise.
+
+Below we are loading the dslabs package.
+
+```{r}
+
+# load dslabs package
+options(repos = c(CRAN = "https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git"))
+install.packages("dslabs")
+library(dslabs)
+# load renv package
+install.packages("renv")
+library(renv)
+# look at help file for gapminder data
+help(gapminder)
+# get overview of data structure 
+str(gapminder)
+
+```
+
+```{r}
+
+# summary of gapminder data
+
+summary(gapminder)
+```
+
+```{r}
+# checking function of type of object gapminder is
+
+class(gapminder)
+```
+
+```{r}
+# load tidyverse
+library(tidyverse)
+# filtering contienent variable to just Africa. I do this by using the dplyr function filter() along with pop %>%. Once this is done I can use str() and summary() to get the data structure and summaries
+
+africadata <- gapminder %>% filter(continent == 'Africa')
+
+str(africadata)
+
+summary(africadata)
+```
+
+```{r}
+
+# Now I will create two new objects, f.im and pop.gdp
+# f.im will consist of the variables fertility and infant mortality 
+# pop.gdp will consist of variables population and gdp
+
+f.im <- africadata %>% select(fertility, infant_mortality)
+
+pop.gdp <- africadata %>% select(population, gdp)
+
+head(f.im)
+head(pop.gdp)
+```
+
+```{r}
+# summary of the two new objects
+
+summary(pop.gdp)
+summary(f.im)
+```
+
+```{r}
+
+# plotting fertlilty and infant mortality 
+
+f.im %>%
+  ggplot(aes(x=fertility, y=infant_mortality)) +
+  geom_point() +
+  labs(x='Fertility', y='Infant Mortality',
+       title='Examination of Infant Morality in African Countries',
+       subtitle='Infant Morality vs Fertility')
+```
+
+```{r}
+
+# plotting population and gdp
+
+pop.gdp %>%
+  ggplot(aes(x=population, y=gdp)) +
+  coord_trans(x='log2') +
+  geom_point() +
+  labs(x='Population', y='Gpd',
+       title='Examination of GDP in African Counties',
+       subtitle='Relationship of GDP vs Population')
+```
+
+The chart imply a positive correlation between fertility and infant mortality as well as a positive correlation between population and gdp. We do see some gaps so we can isolate by grouping together population sizes. Furthermore we can group these by populations larger than 50,000
+
+```{r}
+
+africadata %>%
+  group_by(population) %>%
+  summarize(
+    missing_im = sum(is.na(gdp))
+  )
+```
+
+```{r}
+
+f.im5K <- africadata %>%
+  filter(population >= 50000) %>%
+  select(fertility, infant_mortality)
+```
+
+```{r}
+
+pop.gdp5K <- africadata %>%
+  filter(population >= 50000) %>%
+  select(population, gdp)
+```
+
+```{r}
+
+# summary of new objects
+
+summary(f.im5K)
+summary(pop.gdp5K)
+```
+
+```{r}
+
+# recreating process for new data
+
+f.im5K %>%
+  ggplot(aes(x=fertility, y=infant_mortality)) +
+  geom_point() +
+  labs(x='Fertility', y='Infant Mortality',
+       title='Examination of Infant Morality in African Countries',
+       subtitle='Infant Morality vs Fertility')
+```
+
+```{r}
+
+
+# recreating process for new data
+
+pop.gdp5K %>%
+  ggplot(aes(x=population, y=gdp)) +
+  coord_trans(x='log2') +
+  geom_point() +
+  labs(x='Population', y='Gpd',
+       title='Examination of GDP in African Counties',
+       subtitle='Relationship of GDP vs Population')
+```
