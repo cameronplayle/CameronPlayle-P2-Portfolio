@@ -2,4 +2,128 @@
 title: "Presentation Exercise"
 ---
 
-Placeholder file for the future data/results presentation exercise.
+# Who's The Team to Beat At The World Baseball Classic
+
+The link can be found [here](https://fivethirtyeight.com/features/1-in-5-pitchers-are-frequently-violating-mlbs-future-pitch-clock/)
+
+```{r}
+
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+# Read the dataset
+pitch_data <- read.csv("C:/Users/cplay/Downloads/pitch_tempo.csv")
+```
+
+```{r}
+
+# observing the data
+
+head(pitch_data)
+```
+
+```{r}
+
+# Classify the pitchers based on the 15-second cutoff
+pitch_data <- pitch_data %>%
+  mutate(Classification = ifelse(median_seconds_empty > 15, "Above 15 Seconds", "Below 15 Seconds"))
+```
+
+```{r}
+
+# Plot the data
+ggplot(pitch_data, aes(x = median_seconds_empty)) +
+  geom_dotplot(binwidth = 0.5, fill = ifelse(pitch_data$median_seconds_empty > 15, "blue", "gray"), color = "white") +
+  geom_vline(xintercept = 12.5, linetype = "dotted", size = 1) +
+  geom_vline(xintercept = 15, linetype = "dotted", size = 1) +
+  annotate("text", x = 12.5, y = 0.25, label = "Current MLB average:\n12.5 seconds", hjust = 0, size = 3) +
+  annotate("text", x = 15, y = 0.25, label = "MLB's 15-SECOND\nCUTOFF", hjust = 0, size = 3) +
+  labs(title = "59 pitchers wouldn't meet the new bases-empty pitch clock",
+       subtitle = "Average pitch time for MLB pitchers when the bases were empty, 2022",
+       x = "Time (in seconds)",
+       y = "",
+       caption = "Among pitchers who qualified for the pitches leaderboard.\nSource: Baseball Savant") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16, face = "bold"),
+        plot.subtitle = element_text(size = 12),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+I realized that the above was based on this season's data so far
+
+```{r}
+
+# Read the dataset
+pitch_data2022 <- read.csv("C:/Users/cplay/Downloads/pitch_tempo_2022.csv")
+```
+
+```{r}
+
+# Plot the data
+ggplot(pitch_data, aes(x = median_seconds_empty)) +
+  geom_dotplot(binwidth = 0.5, fill = ifelse(pitch_data$median_seconds_empty > 15, "blue", "gray"), color = "white") +
+  geom_vline(xintercept = 12.5, linetype = "dotted", size = 1) +
+  geom_vline(xintercept = 15, linetype = "dotted", size = 1) +
+  annotate("text", x = 12.5, y = 0.25, label = "Current MLB average:\n12.5 seconds", hjust = 0, size = 3) +
+  annotate("text", x = 15, y = 0.25, label = "MLB's 15-SECOND\nCUTOFF", hjust = 0, size = 3) +
+  labs(title = "59 pitchers wouldn't meet the new bases-empty pitch clock",
+       subtitle = "Average pitch time for MLB pitchers when the bases were empty, 2022",
+       x = "Time (in seconds)",
+       y = "",
+       caption = "Among pitchers who qualified for the pitches leaderboard.\nSource: Baseball Savant") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16, face = "bold"),
+        plot.subtitle = element_text(size = 12),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+Overall I wasn't totally satisfied with this output so I asked GPT if they could replicate something better.
+
+```{r}
+
+# Classify the pitchers based on the 15-second cutoff
+pitch_data <- pitch_data %>%
+  mutate(Classification = ifelse(median_seconds_empty > 15, "Above 15 Seconds", "Below 15 Seconds"))
+```
+
+```{r}
+
+# Identify Giovanny Gallegos
+gallegos_time <- pitch_data %>%
+  filter(entity_name == "Freeland, Kyle") %>%
+  select(median_seconds_empty) %>%
+  pull()
+
+# Plot the data
+ggplot(pitch_data, aes(x = median_seconds_empty)) +
+  geom_dotplot(binwidth = 0.1, fill = ifelse(pitch_data$median_seconds_empty > 15, "blue", "gray"), color = "white", dotsize = 1) +
+  geom_vline(xintercept = 12.5, linetype = "dotted", size = 1) +
+  geom_vline(xintercept = 15, linetype = "dotted", size = 1) +
+  geom_text(aes(x = 12.5, y = 0.05), label = "Current MLB average:\n12.5 seconds", hjust = -0.1, size = 3) +
+  geom_text(aes(x = 15, y = 0.05), label = "MLB's 15-SECOND\nCUTOFF", hjust = -0.1, size = 3) +
+  geom_text(aes(x = gallegos_time, y = 0.15), label = "Giovanny Gallegos", hjust = 1, size = 3) +
+  labs(title = "59 pitchers wouldn't meet the new bases-empty pitch clock",
+       subtitle = "Average pitch time for MLB pitchers when the bases were empty, 2022",
+       x = "Time (in seconds)",
+       y = "",
+       caption = "Among pitchers who qualified for the pitches leaderboard.\nSource: Baseball Savant") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16, face = "bold"),
+        plot.subtitle = element_text(size = 12),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.caption = element_text(hjust = 0))
+```
+
+This came out better but ultimately not exactly like the graph.
