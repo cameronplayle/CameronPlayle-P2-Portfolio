@@ -3,3 +3,105 @@ title: "Tidy Tuesday Exercise"
 ---
 
 Placeholder file for the future Tidy Tuesday exercise.
+
+```{r setup, include=FALSE}
+
+## install.packages("tidytuesdayR")
+
+knitr::opts_chunk$set(echo = TRUE)
+options(repos = c(CRAN = "https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git"))
+
+install.packages("tidytuesdayR")
+tuesdata <- tidytuesdayR::tt_load('2024-07-23')
+## OR
+tuesdata <- tidytuesdayR::tt_load(2024, week = 30)
+
+auditions <- tuesdata$auditions
+eliminations <- tuesdata$eliminations
+finalists <- tuesdata$finalists
+ratings <- tuesdata$ratings
+seasons <- tuesdata$seasons
+songs <- tuesdata$songs
+```
+
+```{r}
+
+# Data Exploration #
+
+summary(auditions)
+summary(eliminations)
+summary(finalists)
+summary(ratings)
+summary(seasons)
+summary(songs)
+summary(tuesdata)
+
+```
+
+```{r}
+# More Data Exploration # 
+
+head(auditions)
+head(eliminations)
+head(finalists)
+head(ratings)
+head(seasons)
+head(songs)
+head(tuesdata)
+
+```
+```{r}
+# Data Tidying and Visualization 
+
+library(ggplot2)
+
+ggplot(ratings, aes(x = episode, y = viewers_in_millions)) +
+  geom_line(aes(color = season), size = 1) +
+  labs(title = "Viewership of American Idol Episodes by Season",
+       x = "Episode",
+       y = "Viewers (Millions)") +
+  theme_minimal()
+
+```
+
+```{r}
+ # Create a Shiny App
+
+library(dplyr)
+
+install.packages("shiny")
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("American Idol Data Explorer"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("season", "Select Season:", choices = unique(ratings$season))
+    ),
+    mainPanel(
+      plotOutput("viewershipPlot")
+    )
+  )
+)
+
+server <- function(input, output) {
+  filtered_data <- reactive({
+    ratings %>% filter(season == input$season)
+  })
+  
+  output$viewershipPlot <- renderPlot({
+    ggplot(filtered_data(), aes(x = episode, y = viewers_in_millions)) +
+      geom_line(color = "blue") +
+      labs(title = paste("Viewership for Season", input$season),
+           x = "Episode",
+           y = "Viewers (Millions)") +
+      theme_minimal()
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+
+```
+
+

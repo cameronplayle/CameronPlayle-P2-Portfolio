@@ -100,6 +100,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="../site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+
+<script src="../site_libs/jquery-3.5.1/jquery.min.js"></script>
+
+<script src="../site_libs/proj4js-2.3.15/proj4.js"></script>
+
+<link href="../site_libs/highcharts-9.3.1/css/motion.css" rel="stylesheet">
+
+<script src="../site_libs/highcharts-9.3.1/highcharts.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/highcharts-3d.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/highcharts-more.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/stock.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/map.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/data.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/exporting.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/offline-exporting.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/drilldown.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/item-series.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/overlapping-datalabels.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/annotations.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/export-data.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/funnel.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/heatmap.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/treemap.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/sankey.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/dependency-wheel.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/organization.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/solid-gauge.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/streamgraph.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/sunburst.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/vector.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/wordcloud.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/xrange.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/tilemap.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/venn.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/gantt.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/timeline.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/parallel-coordinates.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/bullet.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/coloraxis.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/dumbbell.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/lollipop.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/series-label.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/plugins/motion.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/custom/reset.js"></script>
+
+<script src="../site_libs/highcharts-9.3.1/modules/boost.js"></script>
+
+<script src="../site_libs/highchart-binding-0.9.4/highchart.js"></script>
+
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -673,7 +759,7 @@ $songs
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="tidytuesday-exercise_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="tidytuesday-exercise-07.25_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -754,6 +840,434 @@ https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-package
 <div class="cell-output-display">
 <p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
 </div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(highcharter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of contestants per season</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>finalists <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Season) <span class="sc">%&gt;%</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hchart</span>(<span class="st">"column"</span>, <span class="fu">hcaes</span>(<span class="at">x =</span> Season, <span class="at">y =</span> n), <span class="at">name =</span> <span class="st">"Number of Contestants"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(<span class="at">text =</span> <span class="st">"Number of Contestants per Season"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_xAxis</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Season"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_yAxis</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Number of Contestants"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-024cdeecd4842b1eea26" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-024cdeecd4842b1eea26">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Number of Contestants per Season"},"yAxis":{"title":{"text":"Number of Contestants"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"Season":1,"n":10,"x":1,"y":10},{"Season":2,"n":12,"x":2,"y":12},{"Season":3,"n":12,"x":3,"y":12},{"Season":4,"n":12,"x":4,"y":12},{"Season":5,"n":12,"x":5,"y":12},{"Season":6,"n":12,"x":6,"y":12},{"Season":7,"n":12,"x":7,"y":12},{"Season":8,"n":10,"x":8,"y":10},{"Season":9,"n":10,"x":9,"y":10},{"Season":10,"n":10,"x":10,"y":10},{"Season":11,"n":13,"x":11,"y":13},{"Season":12,"n":10,"x":12,"y":10},{"Season":13,"n":13,"x":13,"y":13},{"Season":14,"n":12,"x":14,"y":12},{"Season":15,"n":10,"x":15,"y":10},{"Season":16,"n":10,"x":16,"y":10},{"Season":17,"n":10,"x":17,"y":10}],"type":"column","name":"Number of Contestants"}],"xAxis":{"type":"linear","title":{"text":"Season"}}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Viewership over the seasons</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>ratings <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(season) <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_viewers =</span> <span class="fu">mean</span>(viewers_in_millions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hchart</span>(<span class="st">"line"</span>, <span class="fu">hcaes</span>(<span class="at">x =</span> season, <span class="at">y =</span> average_viewers), <span class="at">name =</span> <span class="st">"Average Viewers"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(<span class="at">text =</span> <span class="st">"Viewership Trends Over the Seasons"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_xAxis</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Season"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_yAxis</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Average Viewers (Millions)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f6961fcc3260b4a07c84" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-f6961fcc3260b4a07c84">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Viewership Trends Over the Seasons"},"yAxis":{"title":{"text":"Average Viewers (Millions)"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"season":1,"average_viewers":11.908,"x":1,"y":11.908},{"season":2,"average_viewers":21.3,"x":2,"y":21.3},{"season":3,"average_viewers":23.53488372093023,"x":3,"y":23.53488372093023},{"season":4,"average_viewers":25.98095238095238,"x":4,"y":25.98095238095238},{"season":5,"average_viewers":29.46341463414634,"x":5,"y":29.46341463414634},{"season":6,"average_viewers":28.94317073170732,"x":6,"y":28.94317073170732},{"season":7,"average_viewers":26.19235714285714,"x":7,"y":26.19235714285714},{"season":8,"average_viewers":24.587375,"x":8,"y":24.587375},{"season":9,"average_viewers":21.98555813953488,"x":9,"y":21.98555813953488},{"season":10,"average_viewers":22.75410256410256,"x":10,"y":22.75410256410256},{"season":11,"average_viewers":17.20075,"x":11,"y":17.20075},{"season":12,"average_viewers":13.07378378378378,"x":12,"y":13.07378378378378},{"season":13,"average_viewers":9.787948717948717,"x":13,"y":9.787948717948717},{"season":15,"average_viewers":9.088750000000001,"x":15,"y":9.088750000000001},{"season":16,"average_viewers":7.88,"x":16,"y":7.88},{"season":17,"average_viewers":7.17421052631579,"x":17,"y":7.17421052631579},{"season":18,"average_viewers":6.8525,"x":18,"y":6.8525}],"type":"line","name":"Average Viewers"}],"xAxis":{"type":"linear","title":{"text":"Season"}}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top audition cities by number of contestants selected</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>auditions <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(audition_city) <span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">tickets_to_hollywood =</span> <span class="fu">sum</span>(tickets_to_hollywood, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tickets_to_hollywood)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hchart</span>(<span class="st">"bar"</span>, <span class="fu">hcaes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(audition_city, tickets_to_hollywood), <span class="at">y =</span> tickets_to_hollywood), <span class="at">name =</span> <span class="st">"Tickets to Hollywood"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(<span class="at">text =</span> <span class="st">"Top 20 Audition Cities by Number of Contestants Selected"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_xAxis</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Audition City"</span>), <span class="at">type =</span> <span class="st">"category"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_yAxis</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Number of Tickets to Hollywood"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_plotOptions</span>(<span class="at">series =</span> <span class="fu">list</span>(<span class="at">dataLabels =</span> <span class="fu">list</span>(<span class="at">enabled =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c3d403bdae8c33e1c139" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-c3d403bdae8c33e1c139">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Top 20 Audition Cities by Number of Contestants Selected"},"yAxis":{"title":{"text":"Number of Tickets to Hollywood"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"dataLabels":{"enabled":true}},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"audition_city":"Nashville, Tennessee","tickets_to_hollywood":591,"y":591,"name":"Nashville, Tennessee"},{"audition_city":"San Francisco, California","tickets_to_hollywood":562,"y":562,"name":"San Francisco, California"},{"audition_city":"Los Angeles, California","tickets_to_hollywood":538,"y":538,"name":"Los Angeles, California"},{"audition_city":"Atlanta, Georgia","tickets_to_hollywood":175,"y":175,"name":"Atlanta, Georgia"},{"audition_city":"Austin, Texas","tickets_to_hollywood":156,"y":156,"name":"Austin, Texas"},{"audition_city":"Chicago, Illinois","tickets_to_hollywood":117,"y":117,"name":"Chicago, Illinois"},{"audition_city":"New York City, New York","tickets_to_hollywood":115,"y":115,"name":"New York City, New York"},{"audition_city":"Dallas, Texas","tickets_to_hollywood":97,"y":97,"name":"Dallas, Texas"},{"audition_city":"Denver, Colorado","tickets_to_hollywood":94,"y":94,"name":"Denver, Colorado"},{"audition_city":"New Orleans, Louisiana","tickets_to_hollywood":88,"y":88,"name":"New Orleans, Louisiana"},{"audition_city":"Boston, Massachusetts","tickets_to_hollywood":85,"y":85,"name":"Boston, Massachusetts"},{"audition_city":"San Diego, California","tickets_to_hollywood":84,"y":84,"name":"San Diego, California"},{"audition_city":"St. Louis, Missouri","tickets_to_hollywood":78,"y":78,"name":"St. Louis, Missouri"},{"audition_city":"Houston, Texas","tickets_to_hollywood":68,"y":68,"name":"Houston, Texas"},{"audition_city":"Detroit, Michigan","tickets_to_hollywood":62,"y":62,"name":"Detroit, Michigan"},{"audition_city":"San Antonio, Texas","tickets_to_hollywood":55,"y":55,"name":"San Antonio, Texas"},{"audition_city":"Milwaukee, Wisconsin","tickets_to_hollywood":53,"y":53,"name":"Milwaukee, Wisconsin"},{"audition_city":"East Rutherford, New Jersey","tickets_to_hollywood":51,"y":51,"name":"East Rutherford, New Jersey"},{"audition_city":"Orlando, Florida","tickets_to_hollywood":47,"y":47,"name":"Orlando, Florida"},{"audition_city":"Oklahoma City, Oklahoma","tickets_to_hollywood":45,"y":45,"name":"Oklahoma City, Oklahoma"}],"type":"bar","name":"Tickets to Hollywood"}],"xAxis":{"type":"category","title":{"text":"Audition City"}}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Question: is there a relationship between Audition City and Viewership?</p>
+<p>Hypothesis:</p>
+<p>The more viewers the higher the populations density in the city where an audition was hosted.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Summarize the `ratings` data to have one entry per season</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>ratings_summary <span class="ot">&lt;-</span> ratings <span class="sc">%&gt;%</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(season) <span class="sc">%&gt;%</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_viewers =</span> <span class="fu">mean</span>(viewers_in_millions, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Merge the datasets on `season`</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> auditions <span class="sc">%&gt;%</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(ratings_summary, <span class="at">by =</span> <span class="st">"season"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Summarize Data</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average viewers for each audition city</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>city_viewership <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(audition_city) <span class="sc">%&gt;%</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_viewers =</span> <span class="fu">mean</span>(average_viewers, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(average_viewers))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>city_viewership <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hchart</span>(<span class="st">"bar"</span>, <span class="fu">hcaes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(audition_city, average_viewers), <span class="at">y =</span> average_viewers), <span class="at">name =</span> <span class="st">"Average Viewers"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_title</span>(<span class="at">text =</span> <span class="st">"Average Viewership by Audition City"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_xAxis</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Audition City"</span>), <span class="at">type =</span> <span class="st">"category"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_yAxis</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">"Average Viewers (Millions)"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hc_plotOptions</span>(<span class="at">series =</span> <span class="fu">list</span>(<span class="at">dataLabels =</span> <span class="fu">list</span>(<span class="at">enabled =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="highchart html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d7dcbda3d4cfb0ad0ee8" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-d7dcbda3d4cfb0ad0ee8">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Average Viewership by Audition City"},"yAxis":{"title":{"text":"Average Viewers (Millions)"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false,"dataLabels":{"enabled":true}},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"audition_city":"Austin, Texasa","average_viewers":29.46341463414634,"y":29.46341463414634,"name":"Austin, Texasa"},{"audition_city":"Greensboro, North Carolina","average_viewers":29.46341463414634,"y":29.46341463414634,"name":"Greensboro, North Carolina"},{"audition_city":"Birmingham, Alabama","average_viewers":28.94317073170732,"y":28.94317073170732,"name":"Birmingham, Alabama"},{"audition_city":"Memphis, Tennessee","average_viewers":28.94317073170732,"y":28.94317073170732,"name":"Memphis, Tennessee"},{"audition_city":"Minneapolis, Minnesota","average_viewers":28.94317073170732,"y":28.94317073170732,"name":"Minneapolis, Minnesota"},{"audition_city":"Charleston, South Carolina","average_viewers":26.19235714285714,"y":26.19235714285714,"name":"Charleston, South Carolina"},{"audition_city":"Cleveland, Ohio","average_viewers":25.98095238095238,"y":25.98095238095238,"name":"Cleveland, Ohio"},{"audition_city":"Jacksonville, Florida","average_viewers":24.587375,"y":24.587375,"name":"Jacksonville, Florida"},{"audition_city":"Kansas City, Missouri","average_viewers":24.587375,"y":24.587375,"name":"Kansas City, Missouri"},{"audition_city":"Phoenix, Arizona","average_viewers":24.587375,"y":24.587375,"name":"Phoenix, Arizona"},{"audition_city":"San Juan, Puerto Rico","average_viewers":24.587375,"y":24.587375,"name":"San Juan, Puerto Rico"},{"audition_city":"Orlando, Florida","average_viewers":23.98325526024363,"y":23.98325526024363,"name":"Orlando, Florida"},{"audition_city":"Honolulu, Hawaii","average_viewers":23.53488372093023,"y":23.53488372093023,"name":"Honolulu, Hawaii"},{"audition_city":"Milwaukee, Wisconsin","average_viewers":22.75410256410256,"y":22.75410256410256,"name":"Milwaukee, Wisconsin"},{"audition_city":"San Francisco, California","average_viewers":22.68477950301337,"y":22.68477950301337,"name":"San Francisco, California"},{"audition_city":"San Diego, California","average_viewers":21.69655357142857,"y":21.69655357142857,"name":"San Diego, California"},{"audition_city":"St. Louis, Missouri","average_viewers":21.59085119047619,"y":21.59085119047619,"name":"St. Louis, Missouri"},{"audition_city":"New York, New York","average_viewers":21.3,"y":21.3,"name":"New York, New York"},{"audition_city":"San Antonio, Texas","average_viewers":21.00847725774555,"y":21.00847725774555,"name":"San Antonio, Texas"},{"audition_city":"Las Vegas, Nevada","average_viewers":20.76562233836624,"y":20.76562233836624,"name":"Las Vegas, Nevada"},{"audition_city":"Dallas, Texas","average_viewers":20.51786835548173,"y":20.51786835548173,"name":"Dallas, Texas"},{"audition_city":"Seattle, Washington","average_viewers":20.42558536585366,"y":20.42558536585366,"name":"Seattle, Washington"},{"audition_city":"Boston, Massachusetts","average_viewers":20.41230716387665,"y":20.41230716387665,"name":"Boston, Massachusetts"},{"audition_city":"Houston, Texas","average_viewers":20.36781686046512,"y":20.36781686046512,"name":"Houston, Texas"},{"audition_city":"East Rutherford, New Jersey","average_viewers":19.97742628205128,"y":19.97742628205128,"name":"East Rutherford, New Jersey"},{"audition_city":"Miami, Florida","average_viewers":19.80011904761905,"y":19.80011904761905,"name":"Miami, Florida"},{"audition_city":"Atlanta, Georgia","average_viewers":19.11812462021183,"y":19.11812462021183,"name":"Atlanta, Georgia"},{"audition_city":"Los Angeles, California","average_viewers":18.05392676059094,"y":18.05392676059094,"name":"Los Angeles, California"},{"audition_city":"Omaha, Nebraska","average_viewers":17.99015293040293,"y":17.99015293040293,"name":"Omaha, Nebraska"},{"audition_city":"Philadelphia, Pennsylvania","average_viewers":17.64055357142857,"y":17.64055357142857,"name":"Philadelphia, Pennsylvania"},{"audition_city":"New Orleans, Louisiana","average_viewers":17.42220968220968,"y":17.42220968220968,"name":"New Orleans, Louisiana"},{"audition_city":"North Charleston, South Carolina","average_viewers":17.20075,"y":17.20075,"name":"North Charleston, South Carolina"},{"audition_city":"Portland, Oregon","average_viewers":17.20075,"y":17.20075,"name":"Portland, Oregon"},{"audition_city":"Denver, Colorado","average_viewers":16.9825366599994,"y":16.9825366599994,"name":"Denver, Colorado"},{"audition_city":"Chicago, Illinois","average_viewers":16.656651311493,"y":16.656651311493,"name":"Chicago, Illinois"},{"audition_city":"Washington, D.C.","average_viewers":16.41672619047619,"y":16.41672619047619,"name":"Washington, D.C."},{"audition_city":"Austin, Texas","average_viewers":15.9075,"y":15.9075,"name":"Austin, Texas"},{"audition_city":"Louisville, Kentucky","average_viewers":15.8807927631579,"y":15.8807927631579,"name":"Louisville, Kentucky"},{"audition_city":"New York City, New York","average_viewers":15.84001999699333,"y":15.84001999699333,"name":"New York City, New York"},{"audition_city":"Salt Lake City, Utah","average_viewers":13.74260790598291,"y":13.74260790598291,"name":"Salt Lake City, Utah"},{"audition_city":"Charlotte, North Carolina","average_viewers":13.07378378378378,"y":13.07378378378378,"name":"Charlotte, North Carolina"},{"audition_city":"Newark, New Jersey","average_viewers":13.07378378378378,"y":13.07378378378378,"name":"Newark, New Jersey"},{"audition_city":"Oklahoma City, Oklahoma","average_viewers":13.07378378378378,"y":13.07378378378378,"name":"Oklahoma City, Oklahoma"},{"audition_city":"Detroit, Michigan","average_viewers":12.64681623931624,"y":12.64681623931624,"name":"Detroit, Michigan"},{"audition_city":"Nashville, Tennessee","average_viewers":12.08193376068376,"y":12.08193376068376,"name":"Nashville, Tennessee"},{"audition_city":"Pittsburgh, Pennsylvania","average_viewers":12.026625,"y":12.026625,"name":"Pittsburgh, Pennsylvania"},{"audition_city":"Bus tour – various cities","average_viewers":9.088750000000001,"y":9.088750000000001,"name":"Bus tour – various cities"},{"audition_city":"Daly City, California","average_viewers":9.088750000000001,"y":9.088750000000001,"name":"Daly City, California"},{"audition_city":"Little Rock, Arkansas","average_viewers":9.088750000000001,"y":9.088750000000001,"name":"Little Rock, Arkansas"},{"audition_city":"Savannah, Georgia","average_viewers":8.484375,"y":8.484375,"name":"Savannah, Georgia"},{"audition_city":"Coeur d'Alene, Idaho","average_viewers":7.17421052631579,"y":7.17421052631579,"name":"Coeur d'Alene, Idaho"},{"audition_city":"Baton Rouge, Louisiana","average_viewers":6.8525,"y":6.8525,"name":"Baton Rouge, Louisiana"},{"audition_city":"Colorado Springs, Colorado","average_viewers":6.8525,"y":6.8525,"name":"Colorado Springs, Colorado"},{"audition_city":"Columbia, South Carolina","average_viewers":6.8525,"y":6.8525,"name":"Columbia, South Carolina"},{"audition_city":"Knoxville, Tennessee","average_viewers":6.8525,"y":6.8525,"name":"Knoxville, Tennessee"},{"audition_city":"Macon, Georgia","average_viewers":6.8525,"y":6.8525,"name":"Macon, Georgia"},{"audition_city":"Mobile, Alabama","average_viewers":6.8525,"y":6.8525,"name":"Mobile, Alabama"},{"audition_city":"Raleigh, North Carolina","average_viewers":6.8525,"y":6.8525,"name":"Raleigh, North Carolina"},{"audition_city":"San Jose, California","average_viewers":6.8525,"y":6.8525,"name":"San Jose, California"},{"audition_city":"Santa Barbara, California","average_viewers":6.8525,"y":6.8525,"name":"Santa Barbara, California"},{"audition_city":"Spokane, Washington","average_viewers":6.8525,"y":6.8525,"name":"Spokane, Washington"},{"audition_city":"Springfield, Illinois","average_viewers":6.8525,"y":6.8525,"name":"Springfield, Illinois"},{"audition_city":"Tallahassee, Florida","average_viewers":6.8525,"y":6.8525,"name":"Tallahassee, Florida"},{"audition_city":"Waco, Texas","average_viewers":6.8525,"y":6.8525,"name":"Waco, Texas"},{"audition_city":"Wichita, Kansas","average_viewers":6.8525,"y":6.8525,"name":"Wichita, Kansas"}],"type":"bar","name":"Average Viewers"}],"xAxis":{"type":"category","title":{"text":"Audition City"}}},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadCSV":"Download CSV","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","downloadXLS":"Download XLS","drillUpText":"◁ Back to {series.name}","exitFullscreen":"Exit from full screen","exportData":{"annotationHeader":"Annotations","categoryDatetimeHeader":"DateTime","categoryHeader":"Category"},"hideData":"Hide data table","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbolMagnitude":1000,"numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"shortWeekdays":["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"thousandsSep":" ","viewData":"View data table","viewFullscreen":"View in full screen","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'rsample' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and testing sets</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>data_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(merged_data, <span class="at">prop =</span> <span class="fl">0.8</span>)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(data_split)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(data_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"recipes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/cplay/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'recipes' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'recipes' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'recipes'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    step</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a recipe</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>rec <span class="ot">&lt;-</span> <span class="fu">recipe</span>(average_viewers <span class="sc">~</span> audition_city, <span class="at">data =</span> train_data) <span class="sc">%&gt;%</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"parsnip"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/cplay/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'parsnip' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parsnip)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'parsnip' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define models</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>linear_model <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>)</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>random_forest_model <span class="ot">&lt;-</span> <span class="fu">rand_forest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"ranger"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>)</span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>svm_model <span class="ot">&lt;-</span> <span class="fu">svm_rbf</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"kernlab"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"workflows"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/cplay/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'workflows' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(workflows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'workflows' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a workflow</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>linear_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(rec) <span class="sc">%&gt;%</span></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(linear_model)</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>rf_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(rec) <span class="sc">%&gt;%</span></span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(random_forest_model)</span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>svm_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(rec) <span class="sc">%&gt;%</span></span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(svm_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tune"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/cplay/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tune' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tune)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tune' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"yardstick"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/cplay/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'yardstick' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yardstick)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'yardstick' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>folds <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(train_data, <span class="at">v =</span> <span class="dv">5</span>)</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define metrics</span></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>model_metrics <span class="ot">&lt;-</span> <span class="fu">metric_set</span>(rmse, rsq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rlang"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/cplay/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'rlang' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidymodels"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Installing package into 'C:/Users/cplay/AppData/Local/R/win-library/4.3'
+(as 'lib' is unspecified)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/src/contrib/PACKAGES'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidymodels' is not available for this version of R
+
+A version of this package for your version of R might be available elsewhere,
+see the ideas at
+https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: unable to access index for repository https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3:
+  cannot open URL 'https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git/bin/windows/contrib/4.3/PACKAGES'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the libraries</span></span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="#cb109-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-4"><a href="#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb109-5"><a href="#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(highcharter)</span>
+<span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span>
+<span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parsnip)</span>
+<span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(workflows)</span>
+<span id="cb109-9"><a href="#cb109-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tune)</span>
+<span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yardstick)</span>
+<span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlang)</span>
+<span id="cb109-13"><a href="#cb109-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-14"><a href="#cb109-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-15"><a href="#cb109-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit models using cross-validation</span></span>
+<span id="cb109-16"><a href="#cb109-16" aria-hidden="true" tabindex="-1"></a>linear_res <span class="ot">&lt;-</span> <span class="fu">fit_resamples</span>(linear_wf, <span class="at">resamples =</span> folds, <span class="at">metrics =</span> model_metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ A | warning: ! There are new levels in a factor: `Santa Barbara, California`, `Wichita,
+                 Kansas`, `Charlotte, North Carolina`, `Spokane, Washington`, `San Juan,
+                 Puerto Rico`, `Baton Rouge, Louisiana`, `Springfield, Illinois`, `Bus tour –
+                 various cities`, and `Knoxville, Tennessee`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>There were issues with some computations   A: x1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ B | warning: ! There are new levels in a factor: `Columbia, South Carolina`, `New York, New
+                 York`, `Portland, Oregon`, `Cleveland, Ohio`, `Memphis, Tennessee`, `Little
+                 Rock, Arkansas`, and `Omaha, Nebraska`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>There were issues with some computations   A: x1
+→ C | warning: ! There are new levels in a factor: `San Diego, California`, `Seattle,
+                 Washington`, `Birmingham, Alabama`, `Raleigh, North Carolina`, and `Waco,
+                 Texas`.
+There were issues with some computations   A: x1
+→ D | warning: ! There are new levels in a factor: `Louisville, Kentucky`, `Austin, Texas`,
+                 `Tallahassee, Florida`, `Newark, New Jersey`, `Colorado Springs, Colorado`,
+                 `Honolulu, Hawaii`, `Kansas City, Missouri`, and `Jacksonville, Florida`.
+There were issues with some computations   A: x1
+→ E | warning: ! There are new levels in a factor: `Washington, D.C.`, `East Rutherford, New
+                 Jersey`, `Charleston, South Carolina`, `Minneapolis, Minnesota`, and `Austin,
+                 Texasa`.
+There were issues with some computations   A: x1
+There were issues with some computations   A: x1   B: x1   C: x1   D: x1   E: x1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>svm_res <span class="ot">&lt;-</span> <span class="fu">fit_resamples</span>(svm_wf, <span class="at">resamples =</span> folds, <span class="at">metrics =</span> model_metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>→ A | warning: ! There are new levels in a factor: `Santa Barbara, California`, `Wichita,
+                 Kansas`, `Charlotte, North Carolina`, `Spokane, Washington`, `San Juan,
+                 Puerto Rico`, `Baton Rouge, Louisiana`, `Springfield, Illinois`, `Bus tour –
+                 various cities`, and `Knoxville, Tennessee`.
+→ B | error:   Assigned data `orig_rows` must be compatible with existing data.
+               ✖ Existing data has 13 rows.
+               ✖ Assigned data has 22 rows.
+               ℹ Only vectors of size 1 are recycled.
+               Caused by error in `vectbl_recycle_rhs_rows()`:
+               ! Can't recycle input of size 22 to size 13.
+→ C | warning: ! There are new levels in a factor: `Columbia, South Carolina`, `New York, New
+                 York`, `Portland, Oregon`, `Cleveland, Ohio`, `Memphis, Tennessee`, `Little
+                 Rock, Arkansas`, and `Omaha, Nebraska`.
+There were issues with some computations   A: x1   B: x1   C: x1
+→ D | error:   Assigned data `orig_rows` must be compatible with existing data.
+               ✖ Existing data has 15 rows.
+               ✖ Assigned data has 22 rows.
+               ℹ Only vectors of size 1 are recycled.
+               Caused by error in `vectbl_recycle_rhs_rows()`:
+               ! Can't recycle input of size 22 to size 15.
+There were issues with some computations   A: x1   B: x1   C: x1
+→ E | warning: ! There are new levels in a factor: `San Diego, California`, `Seattle,
+                 Washington`, `Birmingham, Alabama`, `Raleigh, North Carolina`, and `Waco,
+                 Texas`.
+There were issues with some computations   A: x1   B: x1   C: x1
+→ F | error:   Assigned data `orig_rows` must be compatible with existing data.
+               ✖ Existing data has 17 rows.
+               ✖ Assigned data has 22 rows.
+               ℹ Only vectors of size 1 are recycled.
+               Caused by error in `vectbl_recycle_rhs_rows()`:
+               ! Can't recycle input of size 22 to size 17.
+There were issues with some computations   A: x1   B: x1   C: x1
+→ G | warning: ! There are new levels in a factor: `Louisville, Kentucky`, `Austin, Texas`,
+                 `Tallahassee, Florida`, `Newark, New Jersey`, `Colorado Springs, Colorado`,
+                 `Honolulu, Hawaii`, `Kansas City, Missouri`, and `Jacksonville, Florida`.
+There were issues with some computations   A: x1   B: x1   C: x1
+→ H | error:   Assigned data `orig_rows` must be compatible with existing data.
+               ✖ Existing data has 12 rows.
+               ✖ Assigned data has 21 rows.
+               ℹ Only vectors of size 1 are recycled.
+               Caused by error in `vectbl_recycle_rhs_rows()`:
+               ! Can't recycle input of size 21 to size 12.
+There were issues with some computations   A: x1   B: x1   C: x1
+→ I | warning: ! There are new levels in a factor: `Washington, D.C.`, `East Rutherford, New
+                 Jersey`, `Charleston, South Carolina`, `Minneapolis, Minnesota`, and `Austin,
+                 Texasa`.
+There were issues with some computations   A: x1   B: x1   C: x1
+There were issues with some computations   A: x1   B: x1   C: x1   D: x1   E: x…
+→ J | error:   Assigned data `orig_rows` must be compatible with existing data.
+                ✖ Existing data has 15 rows.
+                ✖ Assigned data has 21 rows.
+                ℹ Only vectors of size 1 are recycled.
+                Caused by error in `vectbl_recycle_rhs_rows()`:
+                ! Can't recycle input of size 21 to size 15.
+There were issues with some computations   A: x1   B: x1   C: x1   D: x1   E: x…
+There were issues with some computations   A: x1   B: x1   C: x1   D: x1   E: x…</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: All models failed. Run `show_notes(.Last.tune.result)` for more
+information.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare model performances</span></span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>linear_res <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric .estimator   mean     n std_err .config             
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 rmse    standard   9.90       5  0.731  Preprocessor1_Model1
+2 rsq     standard   0.0569     5  0.0373 Preprocessor1_Model1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the best model (for example, based on RMSE)</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>best_model <span class="ot">&lt;-</span> rf_wf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

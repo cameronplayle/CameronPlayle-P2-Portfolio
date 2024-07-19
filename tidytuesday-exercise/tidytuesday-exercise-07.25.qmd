@@ -1,0 +1,294 @@
+---
+title: "Tidy Tuesday Exercise"
+---
+
+Placeholder file for the future Tidy Tuesday exercise.
+
+```{r setup, include=FALSE}
+
+## install.packages("tidytuesdayR")
+
+knitr::opts_chunk$set(echo = TRUE)
+options(repos = c(CRAN = "https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git"))
+
+install.packages("tidytuesdayR")
+tuesdata <- tidytuesdayR::tt_load('2024-07-23')
+## OR
+tuesdata <- tidytuesdayR::tt_load(2024, week = 30)
+
+auditions <- tuesdata$auditions
+eliminations <- tuesdata$eliminations
+finalists <- tuesdata$finalists
+ratings <- tuesdata$ratings
+seasons <- tuesdata$seasons
+songs <- tuesdata$songs
+```
+
+```{r}
+
+# Data Exploration #
+
+summary(auditions)
+summary(eliminations)
+summary(finalists)
+summary(ratings)
+summary(seasons)
+summary(songs)
+summary(tuesdata)
+
+```
+
+```{r}
+# More Data Exploration # 
+
+head(auditions)
+head(eliminations)
+head(finalists)
+head(ratings)
+head(seasons)
+head(songs)
+head(tuesdata)
+
+```
+```{r}
+# Data Tidying and Visualization 
+
+library(ggplot2)
+
+ggplot(ratings, aes(x = episode, y = viewers_in_millions)) +
+  geom_line(aes(color = season), size = 1) +
+  labs(title = "Viewership of American Idol Episodes by Season",
+       x = "Episode",
+       y = "Viewers (Millions)") +
+  theme_minimal()
+
+```
+
+```{r}
+ # Create a Shiny App
+
+library(dplyr)
+
+install.packages("shiny")
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("American Idol Data Explorer"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("season", "Select Season:", choices = unique(ratings$season))
+    ),
+    mainPanel(
+      plotOutput("viewershipPlot")
+    )
+  )
+)
+
+server <- function(input, output) {
+  filtered_data <- reactive({
+    ratings %>% filter(season == input$season)
+  })
+  
+  output$viewershipPlot <- renderPlot({
+    ggplot(filtered_data(), aes(x = episode, y = viewers_in_millions)) +
+      geom_line(color = "blue") +
+      labs(title = paste("Viewership for Season", input$season),
+           x = "Episode",
+           y = "Viewers (Millions)") +
+      theme_minimal()
+  })
+}
+
+shinyApp(ui = ui, server = server)
+
+
+```
+
+```{r}
+
+library(highcharter)
+
+# Number of contestants per season
+finalists %>%
+  count(Season) %>%
+  hchart("column", hcaes(x = Season, y = n), name = "Number of Contestants") %>%
+  hc_title(text = "Number of Contestants per Season") %>%
+  hc_xAxis(title = list(text = "Season")) %>%
+  hc_yAxis(title = list(text = "Number of Contestants"))
+
+```
+
+
+
+```{r}
+
+# Viewership over the seasons
+ratings %>%
+  group_by(season) %>%
+  summarise(average_viewers = mean(viewers_in_millions, na.rm = TRUE)) %>%
+  hchart("line", hcaes(x = season, y = average_viewers), name = "Average Viewers") %>%
+  hc_title(text = "Viewership Trends Over the Seasons") %>%
+  hc_xAxis(title = list(text = "Season")) %>%
+  hc_yAxis(title = list(text = "Average Viewers (Millions)"))
+```
+
+
+```{r}
+
+# Top audition cities by number of contestants selected
+auditions %>%
+  group_by(audition_city) %>%
+  summarise(tickets_to_hollywood = sum(tickets_to_hollywood, na.rm = TRUE)) %>%
+  arrange(desc(tickets_to_hollywood)) %>%
+  slice(1:20) %>%
+  hchart("bar", hcaes(x = reorder(audition_city, tickets_to_hollywood), y = tickets_to_hollywood), name = "Tickets to Hollywood") %>%
+  hc_title(text = "Top 20 Audition Cities by Number of Contestants Selected") %>%
+  hc_xAxis(title = list(text = "Audition City"), type = "category") %>%
+  hc_yAxis(title = list(text = "Number of Tickets to Hollywood")) %>%
+  hc_plotOptions(series = list(dataLabels = list(enabled = TRUE)))
+```
+
+
+Question: is there a relationship between Audition City and Viewership?
+
+Hypothesis: 
+
+The more viewers the higher the populations density in the city where an audition was hosted. 
+
+```{r}
+
+
+# Step 1: Summarize the `ratings` data to have one entry per season
+ratings_summary <- ratings %>%
+  group_by(season) %>%
+  summarise(average_viewers = mean(viewers_in_millions, na.rm = TRUE))
+
+# Step 2: Merge the datasets on `season`
+merged_data <- auditions %>%
+  inner_join(ratings_summary, by = "season")
+```
+
+```{r}
+
+# Step 3: Summarize Data
+# Calculate the average viewers for each audition city
+city_viewership <- merged_data %>%
+  group_by(audition_city) %>%
+  summarise(average_viewers = mean(average_viewers, na.rm = TRUE)) %>%
+  arrange(desc(average_viewers))
+```
+
+```{r}
+
+city_viewership %>%
+  hchart("bar", hcaes(x = reorder(audition_city, average_viewers), y = average_viewers), name = "Average Viewers") %>%
+  hc_title(text = "Average Viewership by Audition City") %>%
+  hc_xAxis(title = list(text = "Audition City"), type = "category") %>%
+  hc_yAxis(title = list(text = "Average Viewers (Millions)")) %>%
+  hc_plotOptions(series = list(dataLabels = list(enabled = TRUE)))
+```
+
+```{r}
+
+library(rsample)
+
+# Split the data into training and testing sets
+set.seed(123)
+data_split <- initial_split(merged_data, prop = 0.8)
+train_data <- training(data_split)
+test_data <- testing(data_split)
+```
+```{r}
+
+install.packages("recipes")
+library(recipes)
+
+# Define a recipe
+rec <- recipe(average_viewers ~ audition_city, data = train_data) %>%
+  step_dummy(all_nominal_predictors())
+```
+```{r}
+
+install.packages("parsnip")
+library(parsnip)
+
+# Define models
+linear_model <- linear_reg() %>%
+  set_engine("lm")
+
+random_forest_model <- rand_forest() %>%
+  set_engine("ranger") %>%
+  set_mode("regression")
+
+svm_model <- svm_rbf() %>%
+  set_engine("kernlab") %>%
+  set_mode("regression")
+```
+```{r}
+
+install.packages("workflows")
+library(workflows)
+
+# Create a workflow
+linear_wf <- workflow() %>%
+  add_recipe(rec) %>%
+  add_model(linear_model)
+
+rf_wf <- workflow() %>%
+  add_recipe(rec) %>%
+  add_model(random_forest_model)
+
+svm_wf <- workflow() %>%
+  add_recipe(rec) %>%
+  add_model(svm_model)
+```
+
+```{r}
+install.packages("tune")
+library(tune)
+install.packages("yardstick")
+library(yardstick)
+
+
+set.seed(123)
+folds <- vfold_cv(train_data, v = 5)
+
+# Define metrics
+model_metrics <- metric_set(rmse, rsq)
+```
+
+```{r}
+install.packages("rlang")
+install.packages("tidymodels")
+
+# Load the libraries
+
+
+library(dplyr)
+library(highcharter)
+library(recipes)
+library(parsnip)
+library(workflows)
+library(rsample)
+library(tune)
+library(yardstick)
+library(rlang)
+
+
+# Fit models using cross-validation
+linear_res <- fit_resamples(linear_wf, resamples = folds, metrics = model_metrics)
+svm_res <- fit_resamples(svm_wf, resamples = folds, metrics = model_metrics)
+```
+
+```{r}
+# Compare model performances
+linear_res %>% collect_metrics()
+
+```
+
+```{r}
+# Select the best model (for example, based on RMSE)
+best_model <- rf_wf
+
+```
+
