@@ -5,7 +5,7 @@ project:
 website:
   title: "Cameron Playle Data Analysis Portfolio"
   navbar:
-    left:
+    left: 
       - text: "About Me"
         file: aboutme.qmd
       - text: "Projects"
