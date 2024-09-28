@@ -22,6 +22,8 @@ website:
             file: data-exercise/data-exercise.qmd
           - text: "Assignment #5: Processing Data"
             file: cdcdata-exercise/cdcdata-exercise.qmd
+          - text: "Machine Learning Project"
+            file: Machine Learning Project File/MachineLearningProject.qmd
     right:
       - icon: github 
         href: https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git        
