@@ -10,4 +10,4 @@ Skilled in Python, R, and SQL, I leverage data visualization to communicate comp
 
 My ultimate goal is to leverage my diverse analytics background in a fast-paced, innovative environment, where I can contribute to cutting-edge baseball R&D. By helping teams make data-driven decisions, I aim to advance player performance and development, while working collaboratively to bring out the best version of every athlete, coach, and colleague.
 
-![](images/newwebsitephoto.jpg)
+![](images/IMG_0837.jpg){fig-align="center" width="425"}
