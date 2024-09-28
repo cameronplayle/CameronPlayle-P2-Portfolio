@@ -2,11 +2,7 @@
 title: "Machine Learning Model Project"
 ---
 
-
-
-This Machine Learning Project was used to help predict diabetes among females patients among the Pima Indians. 
-
-
+This Machine Learning Project was used to help predict diabetes among females patients among the Pima Indians.
 
 ```{r}
 read.csv("C:/Users/cplay/Downloads/diabetes.csv")
@@ -240,4 +236,3 @@ cat("AUC for Decision Tree:", auc_tree, "\n")
 cat("AUC for Random Forest:", auc_rf, "\n")
 cat("AUC for SVM:", auc_svm, "\n")
 ```
-
