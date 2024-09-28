@@ -2,7 +2,7 @@
 title: "Machine Learning Model Project"
 ---
 
-This Machine Learning Project was used to help predict diabetes among females patients among the Pima Indians. 
+This Machine Learning Project was used to help predict diabetes among females patients among the Pima Indians.
 
 ```{r}
 read.csv("C:/Users/cplay/Downloads/diabetes.csv")
@@ -84,6 +84,7 @@ logistic_model <- glm(Outcome ~ ., data = diabetes_train, family = binomial)
 # Summary of the model
 summary(logistic_model)
 ```
+
 ```{r}
 library(pROC)
 # Generate predictions on the test set
@@ -97,6 +98,7 @@ roc_curve <- roc(diabetes_test$Outcome, predictions)
 plot(roc_curve, main = "ROC Curve for Logistic Regression Model")
 abline(a = 0, b = 1, col = "red", lty = 2)  # Reference line
 ```
+
 ```{r}
 # Calculate absolute values of coefficients
 abs_coefs <- abs(coef(logistic_model))
@@ -184,6 +186,7 @@ rf_model <- randomForest(Outcome ~ ., data = diabetes_train, ntree = 100)
 # Predict probabilities on the test set
 rf_predictions <- predict(rf_model, newdata = diabetes_test, type = "prob")[,2]
 ```
+
 ```{r}
 ### SVM Model
 
@@ -225,6 +228,7 @@ legend("bottomright", legend = c("Logistic Regression", "Decision Tree", "Random
        col = c("blue", "green", "red", "purple"), lwd = 2)
 
 ```
+
 ```{r}
 # Print AUC values
 cat("AUC for Logistic Regression:", auc_logistic, "\n")
@@ -232,4 +236,3 @@ cat("AUC for Decision Tree:", auc_tree, "\n")
 cat("AUC for Random Forest:", auc_rf, "\n")
 cat("AUC for SVM:", auc_svm, "\n")
 ```
-
