@@ -5,7 +5,6 @@ title: "Machine Learning Model Project"
 This Machine Learning Project was used to help predict diabetes among females patients among the Pima Indians.
 
 ```{r}
-read.csv("C:/Users/cplay/Downloads/diabetes.csv")
 
 
 diabetes <- read.csv("C:/Users/cplay/Downloads/diabetes.csv")
