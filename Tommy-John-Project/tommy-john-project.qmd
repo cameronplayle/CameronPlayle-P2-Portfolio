@@ -170,7 +170,7 @@ ggplot(spin_data, aes(x = TJS, y = spin_rate, fill = as.factor(TJS))) +
 ```
 
 ```{r}
-options(repos = c(CRAN = "https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git"))
+options(repos = c(CRAN = "https://cloud.r-project.org"))
 
 # Load necessary libraries
 install.packages(c("tidymodels", "dplyr", "readr", "ggplot2"), checkBuilt = FALSE)
