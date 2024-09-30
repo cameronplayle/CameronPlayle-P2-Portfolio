@@ -24,6 +24,8 @@ website:
             file: cdcdata-exercise/cdcdata-exercise.qmd
           - text: "Machine Learning Project"
             file: machine-learning-project/MachineLearningProject.qmd
+          - text: "Tommy John Project"
+            file: Tommy-John-Project/tommy-john-project.qmd
     right:
       - icon: github 
         href: https://github.com/cameronplayle/CameronPlayle-P2-Portfolio.git        
