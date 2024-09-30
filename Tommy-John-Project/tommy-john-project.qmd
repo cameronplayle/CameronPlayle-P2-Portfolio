@@ -14,7 +14,6 @@ library(ggplot2)
 pitchdata <- read.csv("C:/Users/cplay/Downloads/savant_data.csv")
 tommyjohn <- read.csv("C:/Users/cplay/Downloads/TommyJohnData.csv")
 
-pitchdata
 ```
 
 ```{r}
