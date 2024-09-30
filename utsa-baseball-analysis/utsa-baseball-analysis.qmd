@@ -1,8 +1,5 @@
 ---
 title: "UTSA Trackman Data"
-subtitle: ""
-author: Cameron Playle
-date: today
 ---
 
 ```{r, echo=FALSE, message=FALSE}
