@@ -2,8 +2,6 @@
 title: "Tommy John Project"
 ---
 
-
-
 ```{r}
 #load needed packages. make sure they are installed.
 library(here) #for data loading/saving
@@ -234,4 +232,3 @@ roc_data <- test_predictions %>%
 
 autoplot(roc_data)
 ```
-
