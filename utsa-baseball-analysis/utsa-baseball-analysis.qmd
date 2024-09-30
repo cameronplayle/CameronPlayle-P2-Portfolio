@@ -1,0 +1,501 @@
+---
+title: "UTSA Trackman Data"
+subtitle: ""
+author: Cameron Playle
+date: today
+---
+
+```{r, echo=FALSE, message=FALSE}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+# Loading data
+install.packages("dplyr")
+install.packages("ggplot2")
+library(dplyr)
+library(ggplot2)
+
+utsa_pitching_data <- read.csv("C:/Users/cplay/Desktop/UTSA Baseball/LSU Series/20210313-LSU-1.csv")
+
+utsa_data <- utsa_pitching_data %>% filter(PitcherTeam == "UTS_ROA")
+```
+
+```{r}
+list(utsa_data$Pitcher)
+n_distinct(utsa_data$Pitcher)
+
+# Velocity and Spin Rate Analysis by Pitcher
+velocity_spin_rate_analysis <- utsa_data %>%
+  group_by(Pitcher, AutoPitchType) %>%
+  summarise(
+    Avg_ReleaseSpeed = mean(RelSpeed, na.rm = TRUE),
+    Avg_SpinRate = mean(SpinRate, na.rm = TRUE),
+    Pitch_Count = n()
+  )
+
+```
+
+```{r}
+# Print the summary table
+print(velocity_spin_rate_analysis)
+
+# Plot the results
+ggplot(velocity_spin_rate_analysis, aes(x = Avg_ReleaseSpeed, y = Avg_SpinRate, size = Pitch_Count, color = AutoPitchType)) +
+  geom_point() +
+  facet_wrap(~ Pitcher) +
+  labs(title = "Velocity and Spin Rate Analysis by Pitcher",
+       x = "Average Release Speed (mph)",
+       y = "Average Spin Rate (rpm)") +
+  theme_minimal()
+```
+
+```{r}
+# Pitch Movement Analysis by Pitcher
+pitch_movement_analysis <- utsa_data %>%
+  group_by(Pitcher, AutoPitchType) %>%
+  summarise(
+    Avg_InducedVertBreak = mean(InducedVertBreak, na.rm = TRUE),
+    Avg_HorzBreak = mean(HorzBreak, na.rm = TRUE),
+    Pitch_Count = n()
+  )
+
+# Print the summary table
+print(pitch_movement_analysis)
+```
+
+```{r}
+# Plot the results
+ggplot(pitch_movement_analysis, aes(x = Avg_HorzBreak, y = Avg_InducedVertBreak, size = Pitch_Count, color = AutoPitchType)) +
+  geom_point() +
+  facet_wrap(~ Pitcher) +
+  labs(title = "Pitch Movement Analysis by Pitcher",
+       x = "Average Horizontal Break (inches)",
+       y = "Average Vertical Break (inches)") +
+  theme_minimal()
+```
+
+```{r}
+### New Code ###
+
+
+utsa_data <- utsa_data %>%
+  mutate(VertApprAngle = atan2(vz0, vy0) * (180 / pi))
+
+# Vertical Approach Angle Analysis by Pitcher
+vertical_approach_angle_analysis <- utsa_data %>%
+  group_by(Pitcher, AutoPitchType) %>%
+  summarise(
+    Avg_Vertical_Approach_Angle = mean(VertApprAngle, na.rm = TRUE),
+    Pitch_Count = n()
+  )
+
+# Print the summary table
+print(vertical_approach_angle_analysis)
+
+# Plot the results
+ggplot(vertical_approach_angle_analysis, aes(x = AutoPitchType, y = Avg_Vertical_Approach_Angle, size = Pitch_Count, color = AutoPitchType)) +
+  geom_point() +
+  facet_wrap(~ Pitcher) +
+  labs(title = "Vertical Approach Angle Analysis by Pitcher",
+       x = "Pitch Type",
+       y = "Average Vertical Approach Angle (degrees)") +
+  theme_minimal()
+```
+
+```{r}
+# Load necessary library
+library(knitr)
+
+# Velocity and Spin Rate Analysis
+kable(velocity_spin_rate_analysis, caption = "Velocity and Spin Rate Analysis by Pitcher")
+
+# Pitch Movement Analysis
+kable(pitch_movement_analysis, caption = "Pitch Movement Analysis by Pitcher")
+
+# Vertical Approach Angle Analysis
+kable(vertical_approach_angle_analysis, caption = "Vertical Approach Angle Analysis by Pitcher")
+```
+
+```{r}
+install.packages("gt")
+library(gt)
+
+# Velocity and Spin Rate Analysis
+velocity_spin_rate_analysis %>%
+  gt() %>%
+  tab_header(title = "Velocity and Spin Rate Analysis by Pitcher")
+
+# Pitch Movement Analysis
+pitch_movement_analysis %>%
+  gt() %>%
+  tab_header(title = "Pitch Movement Analysis by Pitcher")
+
+```
+
+```{r}
+install.packages("gt")
+library(gt)
+
+# Vertical Approach Angle Analysis
+vertical_approach_angle_analysis %>%
+  gt() %>%
+  tab_header(title = "Vertical Approach Angle Analysis by Pitcher")
+```
+
+```{r}
+# Pitch Usage and Distribution by Pitcher
+pitch_usage_distribution <- utsa_data %>%
+  group_by(Pitcher, AutoPitchType) %>%
+  summarise(Pitch_Count = n()) %>%
+  mutate(Pitch_Percentage = (Pitch_Count / sum(Pitch_Count)) * 100)
+
+# Print the summary table
+pitch_usage_distribution %>%
+  gt() %>%
+  tab_header(title = "Pitch Usage and Distribution by Pitcher")
+
+# Plot the results
+ggplot(pitch_usage_distribution, aes(x = AutoPitchType, y = Pitch_Percentage, fill = AutoPitchType)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~ Pitcher) +
+  labs(title = "Pitch Usage and Distribution by Pitcher",
+       x = "Pitch Type",
+       y = "Pitch Percentage (%)") +
+  theme_minimal()
+```
+
+```{r}
+################################## Start of Outcome Based ########################################
+
+# Outcome-Based Analysis
+outcome_analysis <- utsa_data %>%
+  group_by(Pitcher, AutoPitchType, PlayResult) %>%
+  summarise(PlayResult_Count = n()) %>%
+  mutate(PlayResult_Percentage = (PlayResult_Count / sum(PlayResult_Count)) * 100)
+
+# Print the summary table
+outcome_analysis %>%
+  gt() %>%
+  tab_header(title = "Outcome-Based Analysis by Pitcher and Pitch Type")
+
+# Plot the results
+ggplot(outcome_analysis, aes(x = AutoPitchType, y = PlayResult_Percentage, fill = PlayResult)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ Pitcher) +
+  labs(title = "Outcome-Based Analysis by Pitcher and Pitch Type",
+       x = "Pitch Type",
+       y = "Outcome Percentage (%)") +
+  theme_minimal()
+
+
+# Update the PlayResult column using KorBB for Undefined outcomes
+utsa_data <- utsa_data %>%
+  mutate(
+    Updated_PlayResult = ifelse(PlayResult == "Undefined", KorBB, PlayResult)
+  )
+
+# Step 2: Combine PlayResult and Updated_PlayResult into a new column
+utsa_data <- utsa_data %>%
+  mutate(
+    Combined_PlayResult = ifelse(is.na(Updated_PlayResult) | Updated_PlayResult == "", PlayResult, Updated_PlayResult)
+  )
+
+# Outcome-Based Analysis using Combined_PlayResult
+outcome_analysis <- utsa_data %>%
+  group_by(Pitcher, AutoPitchType, Combined_PlayResult) %>%
+  summarise(Event_Count = n()) %>%
+  mutate(Event_Percentage = (Event_Count / sum(Event_Count)) * 100)
+
+# Print the summary table
+outcome_analysis %>%
+  gt() %>%
+  tab_header(title = "Outcome-Based Analysis by Pitcher and Pitch Type")
+
+# Plot the results
+ggplot(outcome_analysis, aes(x = AutoPitchType, y = Event_Percentage, fill = Combined_PlayResult)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ Pitcher) +
+  labs(title = "Outcome-Based Analysis by Pitcher and Pitch Type",
+       x = "Pitch Type",
+       y = "Outcome Percentage (%)") +
+  theme_minimal()
+
+
+# Filter out "Undefined" outcomes from the Combined_PlayResult column
+filtered_data <- utsa_data %>%
+  filter(Combined_PlayResult != "Undefined")
+
+# Outcome-Based Analysis using the filtered data
+outcome_analysis <- filtered_data %>%
+  group_by(Pitcher, AutoPitchType, Combined_PlayResult) %>%
+  summarise(Event_Count = n()) %>%
+  mutate(Event_Percentage = (Event_Count / sum(Event_Count)) * 100)
+
+# Print the summary table
+outcome_analysis %>%
+  gt() %>%
+  tab_header(title = "Outcome-Based Analysis by Pitcher and Pitch Type (Filtered)")
+
+# Plot the results
+ggplot(outcome_analysis, aes(x = AutoPitchType, y = Event_Percentage, fill = Combined_PlayResult)) +
+  geom_bar(stat = "identity", position = "stack") +
+  facet_wrap(~ Pitcher) +
+  labs(title = "Outcome-Based Analysis by Pitcher and Pitch Type (Filtered)",
+       x = "Pitch Type",
+       y = "Outcome Percentage (%)") +
+  theme_minimal()
+```
+
+```{r}
+# Create a list of unique pitchers
+pitchers <- unique(filtered_data$Pitcher)
+
+# Loop through each pitcher and create a separate plot
+for (pitcher in pitchers) {
+  # Filter data for the current pitcher
+  pitcher_data <- filtered_data %>%
+    filter(Pitcher == pitcher) %>%
+    group_by(AutoPitchType, Combined_PlayResult) %>%
+    summarise(Event_Count = n()) %>%
+    mutate(Event_Percentage = (Event_Count / sum(Event_Count)) * 100)
+  
+  # Create the plot for the current pitcher
+  p <- ggplot(pitcher_data, aes(x = AutoPitchType, y = Event_Percentage, fill = Combined_PlayResult)) +
+    geom_bar(stat = "identity", position = "stack") +
+    labs(title = paste("Outcome-Based Analysis for", pitcher),
+         x = "Pitch Type",
+         y = "Outcome Percentage (%)") +
+    theme_minimal() +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels for readability
+      legend.position = "bottom"  # Move legend to the bottom
+    )
+  
+  # Print the plot
+  print(p)
+}
+```
+
+```{r}
+# Filter out "Undefined" outcomes and ensure the Combined_PlayResult column is ready
+filtered_data <- utsa_data %>%
+  mutate(
+    Updated_PlayResult = ifelse(PlayResult == "Undefined", KorBB, PlayResult),
+    Combined_PlayResult = ifelse(is.na(Updated_PlayResult) | Updated_PlayResult == "", PlayResult, Updated_PlayResult)
+  ) %>%
+  filter(Combined_PlayResult != "Undefined")
+
+
+# Calculate efficiency metrics by count
+pitch_efficiency <- filtered_data %>%
+  mutate(
+    # Counting whiffs inferred from strikeouts
+    Whiff = ifelse(Combined_PlayResult == "Strikeout", 1, 0),
+    
+    # Counting strikes (strikeout or any strike)
+    Strike = ifelse(Combined_PlayResult %in% c("Strikeout", "Strike"), 1, 0),
+    
+    # Counting hard-hit balls with exit speed > 95 mph and a hit result
+    HardHit = ifelse(ExitSpeed > 95 & Combined_PlayResult %in% c("Single", "Double", "Triple", "HomeRun"), 1, 0)
+  ) %>%
+  group_by(Pitcher, AutoPitchType) %>%
+  summarise(
+    Whiff_Count = sum(Whiff, na.rm = TRUE),
+    Strike_Count = sum(Strike, na.rm = TRUE),
+    Hard_Hit_Count = sum(HardHit, na.rm = TRUE),
+    Total_Pitches = n()  # To provide context if needed
+  )
+
+# Print the summary table
+pitch_efficiency %>%
+  gt() %>%
+  tab_header(title = "Pitch Efficiency Metrics by Count for Pitcher and Pitch Type")
+
+# Create a list of unique pitchers
+pitchers <- unique(pitch_efficiency$Pitcher)
+
+# Loop through each pitcher and create a separate plot
+for (pitcher in pitchers) {
+  # Filter data for the current pitcher
+  pitcher_data <- pitch_efficiency %>%
+    filter(Pitcher == pitcher)
+  
+  # Create the plot for the current pitcher
+  p <- ggplot(pitcher_data, aes(x = AutoPitchType)) +
+    geom_bar(aes(y = Whiff_Count, fill = "Whiff Count"), stat = "identity", position = position_dodge(width = 0.7), color = "blue") +
+    geom_bar(aes(y = Strike_Count, fill = "Strike Count"), stat = "identity", position = position_dodge(width = 0.7), color = "green") +
+    geom_bar(aes(y = Hard_Hit_Count, fill = "Hard-Hit Count"), stat = "identity", position = position_dodge(width = 0.7), color = "red") +
+    labs(title = paste("Pitch Efficiency Metrics by Count for", pitcher),
+         x = "Pitch Type",
+         y = "Count") +
+    theme_minimal() +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels for readability
+      legend.position = "bottom"  # Move legend to the bottom
+    ) +
+    scale_fill_manual(values = c("Whiff Count" = "blue", "Strike Count" = "green", "Hard-Hit Count" = "red"))
+  
+  # Print the plot
+  print(p)
+}
+```
+
+```{r}
+# Calculate Spin Efficiency Metrics
+spin_efficiency <- filtered_data %>%
+  group_by(Pitcher, AutoPitchType) %>%
+  summarise(
+    Avg_SpinRate = mean(SpinRate, na.rm = TRUE),
+    Avg_InducedVertBreak = mean(InducedVertBreak, na.rm = TRUE),
+    Avg_HorzBreak = mean(HorzBreak, na.rm = TRUE),
+    Pitch_Count = n()  # To provide context for the number of pitches
+  )
+
+# Print the summary table
+spin_efficiency %>%
+  gt() %>%
+  tab_header(title = "Spin Efficiency by Pitcher and Pitch Type")
+
+# Create a list of unique pitchers
+pitchers <- unique(spin_efficiency$Pitcher)
+
+# Loop through each pitcher and create a separate plot
+for (pitcher in pitchers) {
+  # Filter data for the current pitcher
+  pitcher_data <- spin_efficiency %>%
+    filter(Pitcher == pitcher)
+  
+  # Create the plot for the current pitcher
+  p <- ggplot(pitcher_data, aes(x = Avg_SpinRate)) +
+    geom_point(aes(y = Avg_InducedVertBreak, color = "Vertical Break"), size = 4) +
+    geom_point(aes(y = Avg_HorzBreak, color = "Horizontal Break"), size = 4) +
+    labs(title = paste("Spin Efficiency for", pitcher),
+         x = "Average Spin Rate (rpm)",
+         y = "Break (inches)") +
+    theme_minimal() +
+    scale_color_manual(values = c("Vertical Break" = "blue", "Horizontal Break" = "green")) +
+    theme(
+      legend.position = "bottom",  # Move legend to the bottom
+      axis.text.x = element_text(angle = 45, hjust = 1)  # Rotate x-axis labels for readability
+    )
+  
+  # Print the plot
+  print(p)
+}
+```
+
+```{r}
+
+
+# Ensure the dataset includes PlateLocX, PlateLocY, SpinRate, InducedVertBreak, and HorzBreak
+spin_location_data <- filtered_data %>%
+  select(Pitcher, AutoPitchType, PlateLocSide, PlateLocHeight, SpinRate, InducedVertBreak, HorzBreak)
+
+# Define the updated strike zone limits
+strike_zone <- data.frame(
+  x = c(-0.75, 0.75, 0.75, -0.75, -0.75),
+  y = c(1.65, 1.65, 3.65, 3.65, 1.65)
+)
+
+
+# Example for a specific pitcher (you can loop through pitchers similarly to previous steps)
+pitcher_data <- spin_location_data %>%
+  filter(Pitcher == "Example Pitcher Name")  # Replace with the specific pitcher's name
+
+# Heat map visualization
+ggplot(pitcher_data, aes(x = PlateLocSide, y = PlateLocHeight)) +
+  geom_bin2d(bins = 30, aes(fill = ..density..), alpha = 0.8) +
+  geom_path(data = strike_zone, aes(x = x, y = y), color = "black", size = 1) +
+  scale_fill_gradient(low = "blue", high = "red") +
+  geom_point(aes(color = SpinRate, size = abs(InducedVertBreak)), alpha = 0.8) +
+  labs(title = "Pitch Location and Spin Efficiency Heat Map",
+       x = "Horizontal Location (PlateLocX)",
+       y = "Vertical Location (PlateLocY)",
+       fill = "Density",
+       color = "Spin Rate (rpm)",
+       size = "Vertical Break (inches)") +
+  theme_minimal() +
+  theme(
+    legend.position = "right",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+# Loop through each pitcher
+pitchers <- unique(spin_location_data$Pitcher)
+
+for (pitcher in pitchers) {
+  pitcher_data <- spin_location_data %>%
+    filter(Pitcher == pitcher)
+  
+  # Heat map visualization
+  p <- ggplot(pitcher_data, aes(x = PlateLocSide, y = PlateLocHeight)) +
+    geom_bin2d(bins = 30, aes(fill = ..density..), alpha = 0.8) +
+    geom_path(data = strike_zone, aes(x = x, y = y), color = "black", size = 1) +
+    scale_fill_gradient(low = "blue", high = "red") +
+    geom_point(aes(color = SpinRate, size = abs(InducedVertBreak)), alpha = 0.8) +
+    labs(title = paste("Pitch Location and Spin Efficiency Heat Map for", pitcher),
+         x = "Horizontal Location (PlateLocX)",
+         y = "Vertical Location (PlateLocY)",
+         fill = "Density",
+         color = "Spin Rate (rpm)",
+         size = "Vertical Break (inches)") +
+    theme_minimal() +
+    theme(
+      legend.position = "right",
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+  
+  # Print the plot
+  print(p)
+}
+```
+
+```{r}
+# Calculate movement consistency metrics
+pitch_movement_consistency <- filtered_data %>%
+  group_by(Pitcher, AutoPitchType) %>%
+  summarise(
+    SD_HorzBreak = sd(HorzBreak, na.rm = TRUE),
+    SD_InducedVertBreak = sd(InducedVertBreak, na.rm = TRUE),
+    Avg_HorzBreak = mean(HorzBreak, na.rm = TRUE),
+    Avg_InducedVertBreak = mean(InducedVertBreak, na.rm = TRUE),
+    Pitch_Count = n()
+  )
+
+
+# Create a list of unique pitchers
+pitchers <- unique(pitch_movement_consistency$Pitcher)
+
+# Loop through each pitcher and create a plot
+for (pitcher in pitchers) {
+  pitcher_data <- pitch_movement_consistency %>%
+    filter(Pitcher == pitcher)
+  
+  p <- ggplot(pitcher_data, aes(x = Avg_HorzBreak, y = Avg_InducedVertBreak, color = AutoPitchType)) +
+    geom_point(size = 4) +
+    geom_errorbarh(aes(xmin = Avg_HorzBreak - SD_HorzBreak, xmax = Avg_HorzBreak + SD_HorzBreak), height = 0.2) +
+    geom_errorbar(aes(ymin = Avg_InducedVertBreak - SD_InducedVertBreak, ymax = Avg_InducedVertBreak + SD_InducedVertBreak), width = 0.2) +
+    labs(title = paste("Pitch Movement Consistency for", pitcher),
+         x = "Average Horizontal Break (inches)",
+         y = "Average Vertical Break (inches)") +
+    theme_minimal() +
+    theme(
+      legend.position = "right",
+      axis.text.x = element_text(angle = 45, hjust = 1)
+    )
+  
+  # Print the plot
+  print(p)
+}
+```
+
+```{r}
+ggplot(filtered_data, aes(x = PlateLocSide, y = PlateLocHeight)) +
+  geom_bin2d(bins = 30, aes(fill = ..density..), alpha = 0.8) +
+  geom_path(data = strike_zone, aes(x = x, y = y), color = "black", size = 1) +
+  scale_fill_gradient(low = "blue", high = "red") +
+  facet_wrap(~ AutoPitchType) +
+  labs(title = "Pitch Location Heat Map by Pitch Type",
+       x = "Horizontal Location (PlateLocSide)",
+       y = "Vertical Location (PlateLocHeight)",
+       fill = "Density") +
+  theme_minimal()
+```

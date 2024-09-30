@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Cameron Playle Data Analysis Portfolio</title>
+<title>Cameron Playle Data Analysis Portfolio – Assignment #5: Processing Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,25 +20,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent">
@@ -78,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Cameron Playle Data Analysis Portfolio</span>
     </a>
   </div>
@@ -89,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./aboutme.html"> 
+    <a class="nav-link" href="../aboutme.html"> 
 <span class="menu-text">About Me</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -98,35 +132,35 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="./utsa-baseball-analysis/utsa-baseball-analysis.qmd">
+    <a class="dropdown-item" href="../utsa-baseball-analysis/utsa-baseball-analysis.qmd">
  <span class="dropdown-text">UTSA Trackman Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./coding-exercise/coding-exercise.html">
+    <a class="dropdown-item" href="../coding-exercise/coding-exercise.html">
  <span class="dropdown-text">R Coding Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presentation-exercise/presentation-exercise.html">
+    <a class="dropdown-item" href="../presentation-exercise/presentation-exercise.html">
  <span class="dropdown-text">Presentation Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./tidytuesday-exercise/tidytuesday-exercise.html">
+    <a class="dropdown-item" href="../tidytuesday-exercise/tidytuesday-exercise.html">
  <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./data-exercise/data-exercise.html">
+    <a class="dropdown-item" href="../data-exercise/data-exercise.html">
  <span class="dropdown-text">Tidy Tuesday Exercise #4</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./cdcdata-exercise/cdcdata-exercise.html">
+    <a class="dropdown-item" href="../cdcdata-exercise/cdcdata-exercise.html">
  <span class="dropdown-text">Assignment #5: Processing Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./machine-learning-project/MachineLearningProject.html">
+    <a class="dropdown-item" href="../machine-learning-project/MachineLearningProject.html">
  <span class="dropdown-text">Machine Learning Project</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./Tommy-John-Project/tommy-john-project.html">
+    <a class="dropdown-item" href="../Tommy-John-Project/tommy-john-project.html">
  <span class="dropdown-text">Tommy John Project</span></a>
   </li>  
     </ul>
@@ -153,24 +187,166 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Assignment #5: Processing Data</h1>
+</div>
 
 
 
-<p>Cameron Playle Data Analytics Portfolio</p>
-<section id="howdy" class="level1">
-<h1>Howdy!</h1>
-<section id="hello-and-welcome" class="level3">
-<h3 class="anchored" data-anchor-id="hello-and-welcome">Hello and welcome!</h3>
-<p>Welcome to <strong>my website</strong> and <em>data analysis portfolio.</em></p>
-<ul>
-<li>Please use the <code>Menu Bar</code> above to look around.</li>
-<li>Have fun!</li>
-</ul>
-<p><strong>Feel free to change this text any way you want 😁!</strong></p>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
-</section>
-</section>
+</header>
+
+
+<p>Placeholder file for the future R coding exercise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"C:/Users/cplay/Desktop/Practicum II/CameronPlayle-P2-Portfolio/cdcdata-exercise/CDCData.csv"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(file_path)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   357 obs. of  40 variables:
+ $ YEAR                                   : int  2017 2015 2015 2017 2015 2017 2017 2015 2017 2017 ...
+ $ LocationAbbr                           : chr  "TN" "FT" "SC" "KY" ...
+ $ LocationDesc                           : chr  "Tennessee" "Broward County, FL" "South Carolina" "Kentucky" ...
+ $ DataSource                             : chr  "YRBSS" "YRBSS" "YRBSS" "YRBSS" ...
+ $ Topic                                  : chr  "Tobacco Use" "Tobacco Use" "Tobacco Use" "Tobacco Use" ...
+ $ Subtopic                               : chr  "Other Tobacco Use" "Other Tobacco Use" "Other Tobacco Use" "Other Tobacco Use" ...
+ $ ShortQuestionText                      : chr  "Current daily cigar use" "Current cigar use" "Current daily cigar use" "Current cigar use" ...
+ $ Greater_Risk_Question                  : chr  "Currently smoked cigars daily" "Currently smoked cigars" "Currently smoked cigars daily" "Currently smoked cigars" ...
+ $ Description                            : chr  "cigars, cigarillos, or little cigars, on all 30 days during the 30 days before the survey" "cigars, cigarillos, or little cigars, on at least 1 day during the 30 days before the survey" "cigars, cigarillos, or little cigars, on all 30 days during the 30 days before the survey" "cigars, cigarillos, or little cigars, on at least 1 day during the 30 days before the survey" ...
+ $ Data_Value_Symbol                      : chr  "%" "%" "%" "%" ...
+ $ Data_Value_Type                        : chr  "Percentage" "Percentage" "Percentage" "Percentage" ...
+ $ Greater_Risk_Data_Value                : num  1.49 7.14 0.9 10.99 5.43 ...
+ $ Greater_Risk_Data_Value_Footnote_Symbol: logi  NA NA NA NA NA NA ...
+ $ Greater_Risk_Data_Value_Footnote       : logi  NA NA NA NA NA NA ...
+ $ Greater_Risk_Low_Confidence_Limit      : num  1.004 5.579 0.447 8.868 4.233 ...
+ $ Greater_Risk_High_Confidence_Limit     : num  2.21 9.08 1.8 13.54 6.94 ...
+ $ Lesser_Risk_Question                   : chr  "Did not currently smoke cigars daily" "Did not currently smoke cigars" "Did not currently smoke cigars daily" "Did not currently smoke cigars" ...
+ $ Lesser_Risk_Data_Value                 : num  98.5 92.9 99.1 89 94.6 ...
+ $ Lesser_Risk_Data_Value_Footnote_Symbol : logi  NA NA NA NA NA NA ...
+ $ Lesser_Risk_Data_Value_Footnote        : logi  NA NA NA NA NA NA ...
+ $ Lesser_Risk_Low_Confidence_Limit       : num  97.8 90.9 98.2 86.5 93.1 ...
+ $ Lesser_Risk_High_Confidence_Limit      : num  99 94.4 99.6 91.1 95.8 ...
+ $ Sample_Size                            : int  2006 1402 1344 1956 1639 1182 2089 2562 2403 919 ...
+ $ Sex                                    : chr  "Total" "Total" "Total" "Total" ...
+ $ Race                                   : chr  "Total" "Total" "Total" "Total" ...
+ $ Grade                                  : chr  "Total" "Total" "Total" "Total" ...
+ $ SexualIdentity                         : chr  "Total" "Total" "Total" "Total" ...
+ $ SexOfSexualContacts                    : chr  "Total" "Total" "Total" "Total" ...
+ $ GeoLocation                            : chr  "(35.68094058, -85.774490914)" "(26.190096, -80.365865)" "(33.998821303, -81.045371207)" "(37.645970271, -84.774971048)" ...
+ $ TopicId                                : chr  "C02" "C02" "C02" "C02" ...
+ $ SubTopicID                             : chr  "C13" "C13" "C13" "C13" ...
+ $ QuestionCode                           : chr  "QNDAYCGR" "H38" "QNDAYCGR" "H38" ...
+ $ LocationId                             : chr  "47" "106" "45" "21" ...
+ $ StratID1                               : chr  "S1" "S1" "S1" "S1" ...
+ $ StratID2                               : chr  "R1" "R1" "R1" "R1" ...
+ $ StratID3                               : chr  "G1" "G1" "G1" "G1" ...
+ $ StratID4                               : chr  "TN" "FT" "SC" "KY" ...
+ $ StratID5                               : chr  "I1" "I1" "I1" "I1" ...
+ $ StratificationType                     : chr  "State" "Local" "State" "State" ...
+ $ StratID6                               : chr  "P1" "P1" "P1" "P1" ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>selected_data <span class="ot">&lt;-</span> data[, <span class="fu">c</span>(<span class="st">"Description"</span>, <span class="st">"Race"</span>, <span class="st">"GeoLocation"</span>, <span class="st">"Greater_Risk_Data_Value"</span>, <span class="st">"Lesser_Risk_Data_Value"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(selected_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                                                   Description
+1    cigars, cigarillos, or little cigars, on all 30 days during the 30 days before the survey
+2 cigars, cigarillos, or little cigars, on at least 1 day during the 30 days before the survey
+3    cigars, cigarillos, or little cigars, on all 30 days during the 30 days before the survey
+4 cigars, cigarillos, or little cigars, on at least 1 day during the 30 days before the survey
+5 cigars, cigarillos, or little cigars, on at least 1 day during the 30 days before the survey
+6    cigars, cigarillos, or little cigars, on all 30 days during the 30 days before the survey
+   Race                   GeoLocation Greater_Risk_Data_Value
+1 Total  (35.68094058, -85.774490914)                  1.4921
+2 Total       (26.190096, -80.365865)                  7.1355
+3 Total (33.998821303, -81.045371207)                  0.8998
+4 Total (37.645970271, -84.774971048)                 10.9890
+5 Total        (42.360083, -71.05888)                  5.4287
+6 Total       (13.444304, 144.793731)                  0.1459
+  Lesser_Risk_Data_Value
+1                98.5079
+2                92.8645
+3                99.1002
+4                89.0110
+5                94.5713
+6                99.8541</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(selected_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Description            Race           GeoLocation       
+ Length:357         Length:357         Length:357        
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  
+                                                         
+                                                         
+                                                         
+ Greater_Risk_Data_Value Lesser_Risk_Data_Value
+ Min.   : 0.0464         Min.   :83.55         
+ 1st Qu.: 0.8158         1st Qu.:93.71         
+ Median : 1.3327         Median :98.67         
+ Mean   : 3.5246         Mean   :96.48         
+ 3rd Qu.: 6.2946         3rd Qu.:99.18         
+ Max.   :16.4528         Max.   :99.95         </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(selected_data<span class="sc">$</span>Description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+cigars, cigarillos, or little cigars, on 20 or more days during the 30 days before the survey 
+                                                                                          119 
+    cigars, cigarillos, or little cigars, on all 30 days during the 30 days before the survey 
+                                                                                          119 
+ cigars, cigarillos, or little cigars, on at least 1 day during the 30 days before the survey 
+                                                                                          119 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(<span class="fu">table</span>(selected_data<span class="sc">$</span>Description)) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+cigars, cigarillos, or little cigars, on 20 or more days during the 30 days before the survey 
+                                                                                     33.33333 
+    cigars, cigarillos, or little cigars, on all 30 days during the 30 days before the survey 
+                                                                                     33.33333 
+ cigars, cigarillos, or little cigars, on at least 1 day during the 30 days before the survey 
+                                                                                     33.33333 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(selected_data<span class="sc">$</span>Lesser_Risk_Data_Value, <span class="at">main =</span> <span class="st">"Lesserr_Risk_Data_Value"</span>, <span class="at">xlab =</span> <span class="st">"Lesser_Risk_Data_Value"</span>, <span class="at">ylab =</span> <span class="st">"Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cdcdata-exercise_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(selected_data<span class="sc">$</span>Lesser_Risk_Data_Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 96.47541</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(selected_data<span class="sc">$</span>Lesser_Risk_Data_Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.86429</code></pre>
+</div>
+</div>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
